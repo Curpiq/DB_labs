@@ -6,7 +6,7 @@ TRUNCATE TABLE product;
 
 -- 1. INSERT
 
--- 1) Без указания списка полей
+-- 1) Р‘РµР· СѓРєР°Р·Р°РЅРёСЏ СЃРїРёСЃРєР° РїРѕР»РµР№
 INSERT INTO product
 VALUES
     ('Master Yoda', 6000, 2, 'LEGO'),
@@ -19,24 +19,24 @@ VALUES
 
 INSERT INTO appointment
 VALUES
-    ('Директор'),
-	('Заместитель директора'),
-	('Менеджер'),
-	('Кассир');
+    ('Р”РёСЂРµРєС‚РѕСЂ'),
+	('Р—Р°РјРµСЃС‚РёС‚РµР»СЊ РґРёСЂРµРєС‚РѕСЂР°'),
+	('РњРµРЅРµРґР¶РµСЂ'),
+	('РљР°СЃСЃРёСЂ');
 
 INSERT INTO seller
 VALUES
-    ('Юлия', 'Пронина', '10.11.1997', NULL, 1),
-	('Дмитрий', 'Калинин', '17.09.2001', NULL, 2),
-	('Дмитрий', 'Гриценко', '07.10.2001', NULL, 3),
-	('Александра', 'Шумкина', '03.09.2004', NULL, 4),
-	('Aндрей', 'Каблучков', '05.02.2000', NULL, 4);
+    ('Р®Р»РёСЏ', 'РџСЂРѕРЅРёРЅР°', '10.11.1997', NULL, 1),
+	('Р”РјРёС‚СЂРёР№', 'РљР°Р»РёРЅРёРЅ', '17.09.2001', NULL, 2),
+	('Р”РјРёС‚СЂРёР№', 'Р“СЂРёС†РµРЅРєРѕ', '07.10.2001', NULL, 3),
+	('РђР»РµРєСЃР°РЅРґСЂР°', 'РЁСѓРјРєРёРЅР°', '03.09.2004', NULL, 4),
+	('AРЅРґСЂРµР№', 'РљР°Р±Р»СѓС‡РєРѕРІ', '05.02.2000', NULL, 4);
 
 SELECT * FROM product;
 SELECT * FROM appointment;
-SELECT * FROM seller
+SELECT * FROM seller;
 
--- 2) С указанием списка полей
+-- 2) РЎ СѓРєР°Р·Р°РЅРёРµРј СЃРїРёСЃРєР° РїРѕР»РµР№
 INSERT INTO product
     (name, manufacturer, price, quantity) 
 VALUES
@@ -62,7 +62,7 @@ VALUES
 SELECT * FROM sold_product;
 
 
--- 3) С чтением значения из другой таблицы
+-- 3) РЎ С‡С‚РµРЅРёРµРј Р·РЅР°С‡РµРЅРёСЏ РёР· РґСЂСѓРіРѕР№ С‚Р°Р±Р»РёС†С‹
 INSERT INTO seller (appointment_id)
 SELECT appointment_id
 FROM appointment
@@ -72,86 +72,86 @@ SELECT * FROM seller;
 
 -- 2. DELETE
 
--- 1) Всех записей
+-- 1) Р’СЃРµС… Р·Р°РїРёСЃРµР№
 DELETE sold_product;
 
 SELECT * FROM sold_product;
 
 
--- 2) По условию
+-- 2) РџРѕ СѓСЃР»РѕРІРёСЋ
 DELETE FROM product
 WHERE quantity = 0 OR quantity IS NULL;
 
 SELECT * FROM product;
 
--- 3) Очистить таблицу
+-- 3) РћС‡РёСЃС‚РёС‚СЊ С‚Р°Р±Р»РёС†Сѓ
 TRUNCATE TABLE sold_product;
 
 SELECT * FROM sold_product;
 
 -- 3. UPDATE
 
--- 1) Всех записей
+-- 1) Р’СЃРµС… Р·Р°РїРёСЃРµР№
 UPDATE product
 SET quantity = 15;
 
 SELECT * FROM product;
 
--- 2) По условию обновляя один атрибут
+-- 2) РџРѕ СѓСЃР»РѕРІРёСЋ РѕР±РЅРѕРІР»СЏСЏ РѕРґРёРЅ Р°С‚СЂРёР±СѓС‚
 UPDATE product
-SET price = 3300
-WHERE manufacturer = 'LEGO';
+SET price = 2900
+WHERE name = 'Bumblebee' AND price = 3000;
 
 SELECT * FROM product;
 
--- 3) По условию обновляя несколько атрибутов
+-- 3) РџРѕ СѓСЃР»РѕРІРёСЋ РѕР±РЅРѕРІР»СЏСЏ РЅРµСЃРєРѕР»СЊРєРѕ Р°С‚СЂРёР±СѓС‚РѕРІ
 UPDATE seller
-SET first_name = 'Никита', last_name = 'Зорин', date_of_birth = '25.06.2000'
+SET first_name = 'РќРёРєРёС‚Р°', last_name = 'Р—РѕСЂРёРЅ', date_of_birth = '25.06.2000'
 WHERE first_name IS NULL;
 
 SELECT * FROM seller;
 
 -- 4. SELECT
 
--- 1) С определенным набором извлекаемых атрибутов
+-- 1) РЎ РѕРїСЂРµРґРµР»РµРЅРЅС‹Рј РЅР°Р±РѕСЂРѕРј РёР·РІР»РµРєР°РµРјС‹С… Р°С‚СЂРёР±СѓС‚РѕРІ
 SELECT name, price FROM product; 
 
--- 2)  Со всеми атрибутами
+-- 2)  РЎРѕ РІСЃРµРјРё Р°С‚СЂРёР±СѓС‚Р°РјРё
 SELECT * FROM product; 
 
--- 3) С условием по атрибуту
+-- 3) РЎ СѓСЃР»РѕРІРёРµРј РїРѕ Р°С‚СЂРёР±СѓС‚Сѓ
 SELECT * FROM product
 WHERE  price > 3000;
 
 -- 5. SELECT ORDER BY + TOP (LIMIT)
 
--- 1)  С сортировкой по возрастанию ASC + ограничение вывода количества записей
+-- 1)  РЎ СЃРѕСЂС‚РёСЂРѕРІРєРѕР№ РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ ASC + РѕРіСЂР°РЅРёС‡РµРЅРёРµ РІС‹РІРѕРґР° РєРѕР»РёС‡РµСЃС‚РІР° Р·Р°РїРёСЃРµР№
 SELECT TOP 3 * FROM product
 ORDER BY name;
 
--- 2) С сортировкой по убыванию DESC
+-- 2) РЎ СЃРѕСЂС‚РёСЂРѕРІРєРѕР№ РїРѕ СѓР±С‹РІР°РЅРёСЋ DESC
 SELECT * FROM product
 ORDER BY price DESC;
 
--- 3) С сортировкой по двум атрибутам + ограничение вывода количества записей
+-- 3) РЎ СЃРѕСЂС‚РёСЂРѕРІРєРѕР№ РїРѕ РґРІСѓРј Р°С‚СЂРёР±СѓС‚Р°Рј + РѕРіСЂР°РЅРёС‡РµРЅРёРµ РІС‹РІРѕРґР° РєРѕР»РёС‡РµСЃС‚РІР° Р·Р°РїРёСЃРµР№
 SELECT TOP 4 * FROM product
 ORDER BY name, price;
 
--- 4) С сортировкой по первому атрибуту, из списка извлекаемых
+-- 4) РЎ СЃРѕСЂС‚РёСЂРѕРІРєРѕР№ РїРѕ РїРµСЂРІРѕРјСѓ Р°С‚СЂРёР±СѓС‚Сѓ, РёР· СЃРїРёСЃРєР° РёР·РІР»РµРєР°РµРјС‹С…
 SELECT name, price
 FROM product
 ORDER BY 1;
 
--- 6. Работа с датами
+-- 6. Р Р°Р±РѕС‚Р° СЃ РґР°С‚Р°РјРё
 
--- 1) WHERE по дате
+-- 1) WHERE РїРѕ РґР°С‚Рµ
 SELECT * FROM seller
 WHERE YEAR(date_of_birth) = 2000;
 
--- 2) Извлечь из таблицы не всю дату, а только год
-SELECT YEAR(date_of_birth) AS year FROM seller;
+-- 2) РР·РІР»РµС‡СЊ РёР· С‚Р°Р±Р»РёС†С‹ РЅРµ РІСЃСЋ РґР°С‚Сѓ, Р° С‚РѕР»СЊРєРѕ РіРѕРґ
+SELECT first_name, last_name, YEAR(date_of_birth) AS year_of_birth FROM seller;
 
--- 7. SELECT GROUP BY с функциями агрегации
+-- 7. SELECT GROUP BY СЃ С„СѓРЅРєС†РёСЏРјРё Р°РіСЂРµРіР°С†РёРё
 
 -- 1) MIN
 SELECT name, MIN(price) AS min_price
@@ -162,21 +162,21 @@ SELECT name, MAX(price) AS max_price
 FROM product GROUP BY name; 
 
 -- 3) AVG
-SELECT quantity, AVG(price) AS avg_price
-FROM product GROUP BY quantity; 
+SELECT name, AVG(price) AS avg_price
+FROM product GROUP BY name; 
 
 -- 4) SUM
 SELECT manufacturer, SUM(price) AS sum_price
 FROM product GROUP BY manufacturer; 
 
 -- 5) COUNT
-SELECT name, COUNT(*) AS all_products
+SELECT name, COUNT(*) AS quantity_of_models
 FROM product GROUP BY name; 
 
 -- 8. SELECT GROUP BY + HAVING
 
 -- 1)
-SELECT name, COUNT(*) AS all_products
+SELECT name, COUNT(*) AS quantity_of_models
 FROM product
 GROUP BY name
 HAVING COUNT(*) >= 2;
@@ -185,7 +185,7 @@ HAVING COUNT(*) >= 2;
 SELECT name, SUM(price) AS sum_price
 FROM product
 GROUP BY name
-HAVING AVG(quantity) >= 10;
+HAVING SUM(quantity) = 30;
 
 -- 3)
 SELECT name, SUM(quantity) AS sum_quantity
@@ -195,27 +195,27 @@ HAVING AVG(price) >= 3000;
 
 -- 9. SELECT JOIN
 
--- 1) LEFT JOIN двух таблиц и WHERE по одному из атрибутов
+-- 1) LEFT JOIN РґРІСѓС… С‚Р°Р±Р»РёС† Рё WHERE РїРѕ РѕРґРЅРѕРјСѓ РёР· Р°С‚СЂРёР±СѓС‚РѕРІ
 SELECT seller_id, first_name, last_name, name AS appointment
 FROM seller
 LEFT OUTER JOIN appointment  ON seller.appointment_id = appointment.appointment_id
-WHERE seller.appointment_id <= 4;
+WHERE YEAR(seller.date_of_birth) = '2000';
 
--- 2)  RIGHT JOIN. Получить такую же выборку, как и в 9.1
+-- 2)  RIGHT JOIN. РџРѕР»СѓС‡РёС‚СЊ С‚Р°РєСѓСЋ Р¶Рµ РІС‹Р±РѕСЂРєСѓ, РєР°Рє Рё РІ 9.1
 SELECT seller_id, first_name, last_name, name AS appointment
 FROM seller
 RIGHT OUTER JOIN appointment  ON seller.appointment_id = appointment.appointment_id
-ORDER BY seller_id;
+WHERE YEAR(seller.date_of_birth) = '2000'
 
--- 3) LEFT JOIN трех таблиц + WHERE по атрибуту из каждой таблицы
+-- 3) LEFT JOIN С‚СЂРµС… С‚Р°Р±Р»РёС† + WHERE РїРѕ Р°С‚СЂРёР±СѓС‚Сѓ РёР· РєР°Р¶РґРѕР№ С‚Р°Р±Р»РёС†С‹
 
 SELECT sale_id, first_name AS seller_name, name AS appointment
 FROM sale
 LEFT OUTER JOIN seller on sale.seller_id = seller.seller_id
 LEFT OUTER JOIN appointment ON seller.appointment_id = appointment.appointment_id
-WHERE seller.seller_id = 4;
+WHERE sale_id >= 1 AND seller.seller_id >= 5 AND appointment.appointment_id = 4;
 
--- 4) FULL OUTER JOIN двух таблиц
+-- 4) FULL OUTER JOIN РґРІСѓС… С‚Р°Р±Р»РёС†
 SELECT seller_id, first_name, last_name, name AS appointment
 FROM seller
 FULL OUTER JOIN appointment 
@@ -223,12 +223,12 @@ ON seller.appointment_id = appointment.appointment_id
 WHERE seller.appointment_id >= 3;
 
 
--- 10. Подзапросы
+-- 10. РџРѕРґР·Р°РїСЂРѕСЃС‹
 
--- 1) Написать запрос с WHERE IN (подзапрос)
+-- 1) РќР°РїРёСЃР°С‚СЊ Р·Р°РїСЂРѕСЃ СЃ WHERE IN (РїРѕРґР·Р°РїСЂРѕСЃ)
 SELECT name FROM product
 WHERE name IN (SELECT name FROM product WHERE price < 2000);
 
--- 2) Написать запрос SELECT atr1, atr2, (подзапрос) FROM ...    
+-- 2) РќР°РїРёСЃР°С‚СЊ Р·Р°РїСЂРѕСЃ SELECT atr1, atr2, (РїРѕРґР·Р°РїСЂРѕСЃ) FROM ...    
 SELECT seller_id, first_name, last_name, (SELECT name FROM appointment WHERE appointment_id = 2) as appointment
 FROM seller WHERE seller.appointment_id = 2;
